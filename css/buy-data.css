@@ -1,0 +1,78 @@
+body{
+font-family:Arial;
+margin:0;
+background:#f5f6fa;
+}
+
+.container{
+max-width:500px;
+margin:auto;
+padding:20px;
+}
+
+.subtitle{
+color:gray;
+}
+
+.network-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:15px;
+margin:20px 0;
+}
+
+.network{
+background:white;
+border-radius:10px;
+padding:20px;
+text-align:center;
+border:1px solid #eee;
+cursor:pointer;
+}
+
+.network img{
+width:40px;
+}
+
+.network.active{
+border:2px solid gold;
+background:#fffbe6;
+}
+
+label{
+display:block;
+margin-top:15px;
+}
+
+input, select{
+width:100%;
+padding:12px;
+border:1px solid #ddd;
+border-radius:6px;
+margin-top:5px;
+}
+
+.add-cart{
+margin-top:20px;
+width:100%;
+padding:14px;
+background:gold;
+border:none;
+border-radius:8px;
+}
+
+.cart{
+margin-top:25px;
+background:white;
+padding:15px;
+border-radius:10px;
+}
+
+.pay-btn{
+margin-top:20px;
+width:100%;
+padding:15px;
+background:gold;
+border:none;
+border-radius:8px;
+}

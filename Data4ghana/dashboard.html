@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>User Dashboard</title>
+
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/menu.css">
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+<script>
+
+const SUPABASE_URL = "https://gdjunodzuyqdwphlvfdx.supabase.co"
+
+const SUPABASE_ANON_KEY = "sb_publishable_nVPSmZ3E-NDWBxkXv0Goyw_FNOw9WBu"
+
+const supabase = window.supabase.createClient(
+SUPABASE_URL,
+SUPABASE_ANON_KEY
+)
+
+</script>
+
+</head>
+
+<body>
+
+<!-- MENU BUTTON -->
+
+<button class="menu-btn" onclick="openMenu()">☰</button>
+
+<!-- SIDEBAR MENU -->
+
+<div id="sidebar" class="sidebar">
+
+<div class="profile">
+<div class="avatar">👤</div>
+<h3>Doris</h3>
+<p>Account</p>
+</div>
+
+<ul class="menu">
+
+<li class="active">
+<a href="dashboard.html">🏠 Dashboard</a>
+</li>
+
+<li>
+<a href="buy-data.html">📶 Buy Data</a>
+</li>
+
+<li>
+<a href="afa.html">👤 AFA Registration</a>
+</li>
+
+<li>
+<a href="waec.html">🎓 WAEC Results Checker</a>
+</li>
+
+<li>
+<a href="wallet.html">💳 Fund Wallet</a>
+</li>
+
+<li>
+<a href="transactions.html">🕒 Transactions</a>
+</li>
+
+<li>
+<a href="orders.html">📦 Order History</a>
+</li>
+
+</ul>
+
+</div>
+
+<!-- OVERLAY -->
+
+<div id="overlay" onclick="closeMenu()"></div>
+
+<div class="container">
+
+<h1>Welcome back, Dr!</h1>
+<p class="subtitle">Manage your telecom services and transactions</p>
+
+<!-- USER CARD -->
+
+<div class="user-card">
+<h2>Dr Michael</h2>
+<p>CLIENT</p>
+</div>
+
+<!-- QUICK SECTION -->
+
+<div class="grid">
+
+<div class="card">
+<p>CLIENT CODE</p>
+<h3>D4G-12383</h3>
+</div>
+
+<div class="card">
+<h4>Quick Links</h4>
+<button onclick="window.location.href='buy-data.html'">Services</button>
+<button onclick="window.location.href='wallet.html'">Wallet Top Up</button>
+<button>Subscription</button>
+</div>
+
+</div>
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat">
+<p>Wallet Balance</p>
+<h2 id="walletBalance">₵0</h2>
+</div>
+
+<div class="stat">
+<p>Orders Today</p>
+<h2>6</h2>
+</div>
+
+<div class="stat">
+<p>Amount Today</p>
+<h2>₵57.50</h2>
+</div>
+
+<div class="stat">
+<p>Bundle Today</p>
+<h2>12GB</h2>
+</div>
+
+</div>
+
+<!-- TRANSACTIONS -->
+
+<div class="transactions">
+
+<div class="header">
+<h2>Recent Transactions</h2>
+<button onclick="window.location.href='transactions.html'">View All</button>
+</div>
+
+<div class="transaction">
+<div>
+<strong>Data Purchase</strong>
+<p>MTN · 13/03/2026</p>
+</div>
+
+<div class="right">
+<span>-₵5.00</span>
+<label class="success">Completed</label>
+</div>
+</div>
+
+<div class="transaction">
+<div>
+<strong>Data Purchase</strong>
+<p>MTN · 13/03/2026</p>
+</div>
+
+<div class="right">
+<span>-₵5.00</span>
+<label class="pending">Undelivered</label>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<script src="js/menu.js"></script>
+
+<script>
+
+// Load wallet balance from Supabase
+
+async function loadWallet(){
+
+const { data: { user } } = await supabase.auth.getUser()
+
+if(!user){
+
+window.location.href="login.html"
+return
+
+}
+
+let { data } = await supabase
+.from("users")
+.select("wallet_balance")
+.eq("id", user.id)
+.single()
+
+if(data){
+
+document.getElementById("walletBalance").innerText =
+"₵ " + data.wallet_balance
+
+}
+
+}
+
+loadWallet()
+
+</script>
+
+</body>
+
+</html>
